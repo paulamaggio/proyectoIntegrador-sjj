@@ -2,10 +2,10 @@ const productos = require('../db/productos');
 
 const productController = {
     product: function (req,res) {
-        res.render('product')
+        return res.render('product')
     },
     productAdd: function (req,res) {
-        res.render('product-add')
+        return res.render('product-add')
     },
 }
 

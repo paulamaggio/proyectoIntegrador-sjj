@@ -2,10 +2,10 @@ const productos = require('../db/productos');
 
 const usersController = {
     profile: function (req,res) {
-        res.render('profile')
+        return res.render('profile')
     },
     profileEdit: function (req,res) {
-        res.render('profile-edit')
+        return res.render('profile-edit')
     },
 }
 
