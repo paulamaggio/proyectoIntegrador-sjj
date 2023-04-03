@@ -4,8 +4,6 @@ const indexController = require('../controllers/indexController');
 
 router.get('/headerLogueado', indexController.headerLogueado);
 router.get('/', indexController.index);
-router.get('/login', indexController.login);
-router.get('/register', indexController.register);
 router.get('/search', indexController.search);
 
 module.exports = router;

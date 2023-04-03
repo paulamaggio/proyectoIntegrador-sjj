@@ -7,6 +7,9 @@ const productController = {
     productAdd: function (req,res) {
         return res.render('product-add')
     },
+    products: function (req,res) {
+        return res.render('products')
+    },
 }
 
 module.exports = productController;
