@@ -1,4 +1,4 @@
-const productos = require('../db/productos');
+const data = require('../data/data');
 
 const indexController = {
     headerLogueado: function (req,res) {
