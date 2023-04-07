@@ -8,6 +8,32 @@
 	<%- include ('./partials/header') %>
 	<!-- /Header -->
 
+	<!-- Todos los productos -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Todos los productos</h2>
+			</div>
+			<!-- Show the "ultimos" products -->
+			<% for( let i = 0; i < data.length; i++ ) { %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="/product">
+							<figure class="product-box_image">
+								<img src="<%= data[i].fotoProducto %>" alt="cafetera moulinex">
+							</figure>
+							<article class="product-box_data">
+								<h2><%= data[i].nombre %></h2>
+								<p><%= data[i].descripcion %></p>
+								<p>Comentarios: 12</p>
+							</article>
+						</a>
+					</section>
+				</div>
+			<% } %>	
+	</div>
+	<!-- /Todos los productos -->
+
 	<!-- footer -->
 	<%- include ('./partials/footer') %>
 	<!-- /footer -->
