@@ -8,7 +8,7 @@ const data = {
         foto : "/images/users/foto_jeremias.jpg"
     },
     productos: [
-        {   fotoProducto: '/images/products/remeraCortaET.webp',
+        {   fotoProducto: '/images/products/remeraCortaET.jpg',
             nombre: 'I will be right here',
             descripcion: 'Remera con frase de ET, color celeste ',
             fechaDeCarga: '16/02/23'
@@ -38,7 +38,7 @@ const data = {
             descripcion: 'Peluche super suave y tierno de ET',
             fechaDeCarga: '17/03/23'
         },
-        {   fotoProducto: '/images/products/shotsET.png',
+        {   fotoProducto: '/images/products/shotsET.jpg',
             nombre: 'Set de vasos de shot de ET',
             descripcion: 'Vasos de shot del aniversario 40 de ET',
             fechaDeCarga: '9/03/23'
@@ -48,12 +48,12 @@ const data = {
             descripcion: 'Pin coleccionable de la tienda del mejor extraterestre',
             fechaDeCarga: '4/04/23'
         },
-        {   fotoProducto: '/images/products/imanILET.png',
+        {   fotoProducto: '/images/products/imanILET.jpg',
             nombre: 'Magnet I love ET',
             descripcion: 'Iman para decorar tu heladera de ET',
             fechaDeCarga: '27/02/23'
         },
-        {   fotoProducto: '/images/products/imanBeGoodET.png',
+        {   fotoProducto: '/images/products/imanBeGoodET.jpg',
             nombre: 'Magnet Be Good',
             descripcion: 'Iman para decorar tu heladera de ET',
             fechaDeCarga: '13/01/23'
@@ -63,7 +63,7 @@ const data = {
             descripcion: 'Billetera de ET',
             fechaDeCarga: '10/03/23'
         },
-        {   fotoProducto: '/images/products/tazaET.webp',
+        {   fotoProducto: '/images/products/tazaET.jpg',
             nombre: 'ET Mug',
             descripcion: 'Taza con doble diseño de ET',
             fechaDeCarga: '28/02/23'
