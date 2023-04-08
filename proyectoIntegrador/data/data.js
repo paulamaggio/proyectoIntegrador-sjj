@@ -76,7 +76,7 @@ const data = {
     ],
     comentarios: [
         {
-        nombreDeUsuario: "jere_gomez",
+        nombreDeUsuario: "juan_neira",
         textoDeComentario: 'El producto es increible',
         imagenDePerfil: '/images/users/foto_jeremias.jpg',
         },

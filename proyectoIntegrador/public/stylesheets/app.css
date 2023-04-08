@@ -1,5 +1,9 @@
 /*====== Fonts ======*/
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Markazi+Text&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Copse&display=swap');
 
 
 /*====== Variables ======*/
@@ -10,7 +14,7 @@
   --gray: #36336f;
   --light-gray: #e6e8e9;
   --green: #39b54a;
-  --base-font-family: 'Roboto', sans-serif
+  --base-font-family: 'Arvo', sans-serif
 }
 
 
@@ -125,11 +129,13 @@ hr {
 .main-navbar {
   margin-top: 20px;
   display: none;
+  font-family: 'Copse';
 }
 
 .left-navbar,
 .right-navbar {
   font-size: 1.5em;
+  font-family: 'Copse';
 }
 
 .logout{
@@ -277,12 +283,14 @@ hr {
   color: var(--gray);
   font-size: 2.4em;
   font-weight: 400;
+  font-family: 'Markazi Text' ;
 }
 
 .footer-data p {
   color: var(--gray);
   font-size: 1.5em;
   font-weight: 300;
+  font-family: 'Markazi Text' ;
 }
 
 .sub-footer {
@@ -477,6 +485,7 @@ textarea.form-input {
 }
 
 
+
 /*====== Media-Queries ======*/
 @media (min-width: 768px) {
   .main-header_credit-link {
@@ -527,4 +536,5 @@ textarea.form-input {
     width: 95%;
     margin: auto;
   }
+
 }
