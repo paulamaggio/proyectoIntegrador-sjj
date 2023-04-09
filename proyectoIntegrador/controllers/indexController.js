@@ -5,7 +5,7 @@ const indexController = {
         return res.render('headerLogueado');
     },
     index: function (req,res) {
-        return res.render('index', {data: data.productos});
+        return res.render('index', {data: data});
     },
     search: function (req,res) {
         return res.render('search-results');
