@@ -97,7 +97,7 @@ const data = {
         },
         {
         nombreDeUsuario: "justivergara",
-        textoDeComentario: 'Traje mi peluche a Usuahia',
+        textoDeComentario: 'Traje mi peluche a Ushuaia',
         imagenDePerfil: '/images/users/justivergara.jpg',
         },
     ]
