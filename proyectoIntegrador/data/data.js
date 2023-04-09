@@ -83,22 +83,22 @@ const data = {
         {
         nombreDeUsuario: "bocapasion",
         textoDeComentario: 'Podria tener un buzo de boca?',
-        imagenDePerfil: '/images/users/foto_jeremias.jpg',
+        imagenDePerfil: '/images/users/bocapasion.jpg',
         },
         {
         nombreDeUsuario: "sofimaggio",
         textoDeComentario: 'Me encanta ET',
-        imagenDePerfil: '/images/users/foto_jeremias.jpg',
+        imagenDePerfil: '/images/users/sofimaggio.jpg',
         },
         {
         nombreDeUsuario: "lolo_123",
         textoDeComentario: 'Tienen tazas de ET?',
-        imagenDePerfil: '/images/users/foto_jeremias.jpg',
+        imagenDePerfil: '/images/users/lolo_123.jpg',
         },
         {
         nombreDeUsuario: "justivergara",
         textoDeComentario: 'Traje mi peluche a Usuahia',
-        imagenDePerfil: '/images/users/foto_jeremias.jpg',
+        imagenDePerfil: '/images/users/justivergara.jpg',
         },
     ]
 }
