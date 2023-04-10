@@ -8,7 +8,7 @@ const indexController = {
         return res.render('index', {data: data.productos});
     },
     search: function (req,res) {
-        return res.render('search-results');
+        return res.render('search-results', {data: data.productos});
     },
 }
 
