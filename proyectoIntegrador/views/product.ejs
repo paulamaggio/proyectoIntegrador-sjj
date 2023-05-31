@@ -10,33 +10,35 @@
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
-			<h2 class="products-title"><%= data.productos[2].nombre %></h2> 
-			<p class="product-detail-description">
+			<h2 class="products-title"><%= data.nombreProducto %></h2> 
+			<a href="/users/profile/<%= data.comentario.idUsuario %>"><p class="product-detail-description">Publicado por: <%= data.productoUsuario.email %></p></a>
+			<!-- <p class="product-detail-description">
 				<a href="/product/add">Editar</a>
-			</p>
+			</p> -->
 		</div>
 		<div class="product-detail">
 			<div class="row">
 				<article class="col-12 col-lg-8 product-detail-info">
-					<img src="<%= data.productos[2].fotoProducto %>" alt="" class="product-detail-img">
-					<p class="product-detail-description"><%= data.productos[2].descripcion %></p>
+					<img src="<%= data.fotoProducto %>" alt="" class="product-detail-img">
+					<p class="product-detail-description"><%= data.descripcion %></p>
 				</article>
 
 				<!-- Comentarios -->
-				<div class="col-12 col-lg-4">
-					<section class="comments">
-						<% for( let i = 0; i < data.comentarios.length; i++ ) { %>
-							<article>
-								<img src="<%= data.comentarios[i].imagenDePerfil %>" alt="">
-								<div class="data">
-									<p class="user">
-									<strong> <a href="/users/profile"><%= data.comentarios[i].nombreDeUsuario %></a> </strong>
-									 <%= data.comentarios[i].textoDeComentario %></p>
-								</div>
-							</article>
-						<% } %>
-					</section>
-					<!-- /Comentarios -->
+                <div class="col-12 col-lg-4">
+                    <section class="comments">
+                        <% for( let i = 0; i < data.comentario.length; i++ ) { %>
+                            <article>
+                                <img src="<%= data.comentario[i].imagenDePerfil %>" alt="">
+                                <div class="data">
+                                    <p class="user">
+                                    <strong> <a href="/users/profile"><%= data.comentario[i].nombreDeUsuario %></a> </strong>
+                                     <%= data.comentario[i].comentario %></p>
+                                </div>
+                            </article>
+                        <% } %>
+                    </section>
+                    <!-- /Comentarios -->
+
 
 					<form class="form" action="/product" method="get">
 						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
