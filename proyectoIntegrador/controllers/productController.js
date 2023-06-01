@@ -28,10 +28,6 @@ const productController = {
     productAdd: function (req,res) {
         return res.render('product-add', {data: data})
     },
-
-    products: function (req,res) {
-        return res.render('products', {data: data.productos})
-    },
 }
 
 module.exports = productController;
