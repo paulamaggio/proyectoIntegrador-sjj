@@ -13,7 +13,7 @@ const indexController = {
 
         Producto.findAll({
             order: [['createdAt', 'DESC']],
-            include: [{association:'productoUsuario'}, {association:'comentario'}]
+            include: [{association:'usuarios'}, {association:'comentarios'}]
         })
         .then(function(data){
             return res.render('index', {data: data});

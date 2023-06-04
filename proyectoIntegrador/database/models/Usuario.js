@@ -6,6 +6,9 @@ module.exports = function (sequelize, dataTypes) {
             primaryKey: true,
             type: dataTypes.INTEGER
         },
+        nombreUsuario:{
+            type: dataTypes.STRING
+        },
         email:{
             type: dataTypes.STRING
         },
@@ -32,7 +35,7 @@ module.exports = function (sequelize, dataTypes) {
     
     Usuario.associate = function(models){
         Usuario.hasMany(models.Producto,{
-            as: 'productoUsuario',
+            as: 'productos',
             foreignKey: 'idUsuario'
         })
         Usuario.hasMany(models.Comentario, {

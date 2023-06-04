@@ -11,7 +11,7 @@
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
 			<h2 class="products-title"><%= data.nombreProducto %></h2> 
-			<a href="/users/profile/<%= data.comentario.idUsuario %>"><p class="product-detail-description">Publicado por: <%= data.productoUsuario.email %></p></a>
+			<p class="product-detail-description">Publicado por: <%= data.usuarios.nombreUsuario %></p>
 			<!-- <p class="product-detail-description">
 				<a href="/product/add">Editar</a>
 			</p> -->
@@ -26,13 +26,13 @@
 				<!-- Comentarios -->
                 <div class="col-12 col-lg-4">
                     <section class="comments">
-                        <% for( let i = 0; i < data.comentario.length; i++ ) { %>
+                        <% for( let i = 0; i < data.comentarios.length; i++ ) { %>
                             <article>
-                                <img src="<%= data.productoUsuario.fotoPerfil %>" alt="">
+                                <img src="<%= data.comentarios[i].usuarios.fotoPerfil %>" alt="">
                                 <div class="data">
                                     <p class="user">
-                                    <strong> <a href="/users/profile"><%= data.comentario[i].nombreDeUsuario %></a> </strong>
-                                     <%= data.comentario[i].comentario %></p>
+                                    <strong> <a href="/users/profile/<%= data.comentarios[i].usuarios.id %>"><%= data.comentarios[i].usuarios.nombreUsuario %></a> </strong>
+                                     <%= data.comentarios[i].comentario %></p>
                                 </div>
                             </article>
                         <% } %>

@@ -5,19 +5,12 @@ const Producto = db.Producto;
 
 const productController = {
 
-    prueba: function(req, res) {
-        Producto.findAll().then(function(result){
-            return res.send(result);
-        }).catch(function(err){console.log(err)})
-    },
-
     product: function (req,res) {
 
         Producto.findByPk(req.params.id, {
-            include: [{association:'productoUsuario'}, {association:'comentario'}]
+            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]
         })
         .then(function(data){
-            //return res.send(data)
             return res.render('product', {data: data})
         })
         .catch(function(err){

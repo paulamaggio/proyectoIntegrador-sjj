@@ -4,6 +4,7 @@ use proyectoIntegrador ;
 
 CREATE TABLE usuarios( 
 id INT UNSIGNED PRIMARY KEY auto_increment, 
+nombreUsuario VARCHAR(200) NOT NULL UNIQUE,
 email VARCHAR(200) NOT NULL UNIQUE,
 contrasena VARCHAR(250) NOT NULL,
 fotoPerfil VARCHAR(300),
@@ -38,12 +39,12 @@ updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 deletedAt  TIMESTAMP null
 );
 
-insert into usuarios(id,email,contrasena,fotoPerfil,fecha,dni)
-values (default, "juanneira@gmail.com", "juan_neira", "/images/users/foto_jeremias.jpg", '2003-10-08', 45978253),
-(default, "bocapasion@gmail.com", "bocapasion", "/images/users/bocapasion.jpg", '2003-10-08', 45212253),
-(default, "sofimaggio@gmail.com", "sofimaggio", "/images/users/sofimaggio.jpg", '2003-10-08', 45212253),
-(default, "lolo_123@gmail.com", "lolo_123", "/images/users/lolo_123.jpg", '2003-10-08', 46212563),
-(default, "justivergara@gmail.com", "justivergara", "/images/users/justivergara.jpg", '2003-10-08', 4512253);
+insert into usuarios(id,nombreUsuario,email,contrasena,fotoPerfil,fecha,dni)
+values (default, 'juanneira', "juanneira@gmail.com", "juan_neira", "/images/users/foto_jeremias.jpg", '2003-10-08', 45978253),
+(default, 'boquita', "bocapasion@gmail.com", "bocapasion", "/images/users/bocapasion.jpg", '2003-10-08', 45212253),
+(default, 'sofiamaggio', "sofimaggio@gmail.com", "sofimaggio", "/images/users/sofimaggio.jpg", '2003-10-08', 45212253),
+(default, 'lolo', "lolo_123@gmail.com", "lolo_123", "/images/users/lolo_123.jpg", '2003-10-08', 46212563),
+(default, 'justivergara', "justivergara@gmail.com", "justivergara", "/images/users/justivergara.jpg", '2003-10-08', 4512253);
 
 insert into productos(id, idUsuario, nombreProducto, fotoProducto, descripcion)
 values (default, 1, "I will be right here", '/images/products/remeraCortaET.jpg', "Remera con frase de ET, color celeste"),

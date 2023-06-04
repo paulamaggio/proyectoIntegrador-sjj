@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
+
 
 const indexRouter = require('./routes/index');
 const productRouter = require('./routes/product');
@@ -24,6 +26,11 @@ app.use('/', indexRouter);
 app.use('/product', productRouter);
 app.use('/users', usersRouter);
 
+// configuracion de session
+app.use(session({ 
+  secret: "ETyavaacasa",
+	resave: false,
+	saveUninitialized: true }));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

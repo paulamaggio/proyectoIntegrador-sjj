@@ -4,22 +4,25 @@ const db = require('../database/models');
 const Usuario = db.Usuario;
 const Comentario = db.Comentario;
 
-const usersController = {
+const bcrypt = require('bcryptjs');
 
-    prueba: function(req, res) {
-        Usuario.findAll().then(function(result){
-            return res.send(result);
-        }).catch(function(err){console.log(err)})
-      },
-    
-    pruebacom: function(req, res) {
-        Comentario.findAll().then(function(result){
-            return res.send(result);
-        }).catch(function(err){console.log(err)})
-      },
+const usersController = {
 
     profile: function (req,res) {
         return res.render('profile', {data: data})
+        // Usuario.findByPk(req.params.id, {
+        //     include: [{association:'productos'}]
+        // })
+        // .then(function(data){
+        //     if (data != null) {
+        //         return res.render('profile', { data: data })
+        //     } else {
+        //         return res.redirect('/')
+        //     }
+        // })
+        // .catch(function(err){
+        //     console.log(err);
+        // })
     },
     profileEdit: function (req,res) {
          return res.render('profile-edit', {data: data})
@@ -27,9 +30,45 @@ const usersController = {
     login: function (req,res) {
         return res.render('login');
     },
-    register: function (req,res) {
+    register: function (req,res) { 
         return res.render('register');
     },
+    registerStore: function (req,res) {
+        let errors = {};
+        if(req.body.nombreUsuario == ""){
+            errors.message = "El nombre de usuario no puede estar vacío."; //cargamos el mensaje
+            res.locals.errors = errors; //Usamos locals para pasarlo a la vista
+            return res.render('register'); //Renderizamos la vista 
+        } else if (req.body.contrasena.length < 3) {
+            errors.message = 'La contraseña debe tener al menos 3 caracteres'; 
+            res.locals.errors = errors;
+            return res.render('register');
+        } else {
+            Usuario.findOne({
+                where: [{email: req.body.email}]
+            })
+            .then(function (data) {
+                if (data != null){
+                    errors.message = 'El email ya está registrado';
+                    res.locals.errors = errors;
+                    console.log(errors); 
+                    return res.render('register');  
+                } else { // si no esta registrado el email entonces crea la cuenta nueva con la info que trajo el formulario
+                    Usuario.create ({
+                        nombreUsuario: req.body.nombreUsuario,
+                        email: req.body.email,
+                        contrasena: bcrypt.hashSync(req.body.contrasena, 10),
+                        fotoPerfil: req.body.fotoPerfil, // ver que se haria en este caso para poder poner una foto                        
+                        fecha: req.body.nacimiento,
+                        dni: req.body.dni,
+                    });
+                    return res.redirect('/users/login'); // devuleve al login para que ingrese a la cuenta 
+                }
+            }).catch(function(error) {
+                console.log(error);
+            })
+        }
+    }
 }
 
 module.exports = usersController;
