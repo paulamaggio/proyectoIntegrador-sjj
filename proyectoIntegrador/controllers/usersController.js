@@ -30,6 +30,9 @@ const usersController = {
     login: function (req,res) {
         return res.render('login');
     },
+    loginStore: function (req,res) {
+        return res.send(req.session)
+    },
     register: function (req,res) { 
         return res.render('register');
     },
