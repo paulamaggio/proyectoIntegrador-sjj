@@ -1,3 +1,7 @@
 node_modules
 .DS_Store
+<<<<<<< HEAD
 /database/config/config.js
+=======
+/database/config/config.js
+>>>>>>> 0a01927938bfa7d93c3525bae558f3fbb8aeae7e
