@@ -31,7 +31,30 @@ const usersController = {
         return res.render('login');
     },
     loginStore: function (req,res) {
-        return res.send(req.session)
+        let errors = {};
+        Usuario.findOne({
+            where: [{email: req.body.email}]
+        })
+        .then(function (data) {
+            if(data == null){
+                errors.message = 'El usuario no existe';
+                res.locals.errors = errors; /* guardar el error en locals */
+                return res.render('login');
+            } else if (bcrypt.compareSync(req.body.contrasena, data.contrasena) == false) {
+                errors.message = 'La contraseña es incorrecta';
+                res.locals.errors = errors;
+                return res.render('login');
+            } else if (req.body.recordame != undefined){
+                // cookies
+                res.cookie('idUsuario', data.id, {maxAge: 1000 * 60 * 5})
+                res.session.nombreUsuario = data
+                return res.redirect('/');
+            } else {
+                return res.redirect('/');
+            }
+        }).catch(function(error) {
+            console.log(error);
+        })
     },
     register: function (req,res) { 
         return res.render('register');
@@ -39,7 +62,7 @@ const usersController = {
     registerStore: function (req,res) {
         let errors = {};
         if(req.body.nombreUsuario == ""){
-            errors.message = "El nombre de usuario no puede estar vacío."; //cargamos el mensaje
+            errors.message = 'El nombre de usuario no puede estar vacío.'; //cargamos el mensaje
             res.locals.errors = errors; //Usamos locals para pasarlo a la vista
             return res.render('register'); //Renderizamos la vista 
         } else if (req.body.contrasena.length < 3) {
@@ -53,8 +76,7 @@ const usersController = {
             .then(function (data) {
                 if (data != null){
                     errors.message = 'El email ya está registrado';
-                    res.locals.errors = errors;
-                    console.log(errors); 
+                    res.locals.errors = errors; 
                     return res.render('register');  
                 } else { // si no esta registrado el email entonces crea la cuenta nueva con la info que trajo el formulario
                     Usuario.create ({

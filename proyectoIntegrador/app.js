@@ -28,6 +28,12 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true }));
 
+// pasar datos de session a las vistas
+app.use(function (req, res, next) {
+  res.locals.user = req.session.nombreUsuario
+  return next()
+})
+
 app.use('/', indexRouter);
 app.use('/product', productRouter);
 app.use('/users', usersRouter);
