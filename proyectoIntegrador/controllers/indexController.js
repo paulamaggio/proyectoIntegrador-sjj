@@ -26,23 +26,24 @@ const indexController = {
     },
 
     search: function (req,res) {
-        let search = req.query.search;
+        let busqueda = req.query.busqueda;
         let relaciones = {
             include: [
-                {association: 'usuarios'}
+                {association:'usuarios'}, {association:'comentarios'}
             ]
         };
         let criterio = {
-            where:[{nombre:{[op.like]: '%' + search + '%'}}]
+            where:[{nombreProducto:{[op.like]:'%'+busqueda+'%'}}]
         }
         Producto.findAll(criterio,relaciones)
-        .then(function (data) {
-            return res.render('search-results', {data: data});
-        })
+        .then(data=> res.send(data))
+            
+           // return res.render('search-results', {data: data});
+        
         .catch(function(err){
             console.log(err);
         })
-    },
+    }
 }
 
 module.exports = indexController;
