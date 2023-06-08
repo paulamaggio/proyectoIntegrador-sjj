@@ -2,7 +2,7 @@
 
 const db = require('../database/models');
 const Producto = db.Producto;
-const op = db.sequelize.Op;
+const op = db.Sequelize.Op;
 
 
 const indexController = {
@@ -26,20 +26,39 @@ const indexController = {
     },
 
     search: function (req,res) {
-        let busqueda = req.query.busqueda;
-        let relaciones = {
-            include: [
-                {association:'usuarios'}, {association:'comentarios'}
-            ]
-        };
-        let criterio = {
-            where:[{nombreProducto:{[op.like]:'%'+busqueda+'%'}}]
-        }
-        Producto.findAll(criterio,relaciones)
-        .then(data=> res.send(data))
-            
-           // return res.render('search-results', {data: data});
-        
+        // Producto.findAll({
+        //     where:[{nombreProducto:{[op.like]:'%'+req.query.busqueda+'%'}}],
+        //     include: [{association:'usuarios'}, {association:'comentarios'}]
+        // })
+        // .then(function(data){
+        //     return res.render('search-results', {data: data});
+        // })
+        // .catch(function(err){
+        //     console.log(err);
+        // })
+
+        // let busqueda = req.query.busqueda;
+        // let relaciones = {include: [{association:'usuarios'}, {association:'comentarios'}]};
+        // let criterio = {where:[{nombreProducto:{[op.like]:'%'+busqueda+'%'}}]}
+        // Producto.findAll(criterio,relaciones)
+        // .then(function(data){
+        //     // return res.send(data);
+        //     // return res.render('search-results', {data: data});
+        // })
+        // .catch(function(err){
+        //     console.log(err);
+        // })
+
+        let busqueda = req.query.search;
+        console.log(busqueda);
+        Producto.findAll({
+            include: [{association:'usuarios'}, {association:'comentarios'}],
+            where: {nombreProducto: {[op.like]:"%"+busqueda+"%"}}
+        })
+        .then(function(data){
+            console.log(data);
+            return res.render('search-results', {data: data});
+        })
         .catch(function(err){
             console.log(err);
         })

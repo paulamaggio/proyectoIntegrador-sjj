@@ -17,6 +17,36 @@
 			</div>
 			<!-- Show the "ultimos" products -->
 	</div>
+
+	<div>
+		<% if (data.length == 0) { %>
+			<p class="product-detail-description">Lo sentimos no hay resultados para su busqueda</p>
+		<% } else { %> 
+		
+			<% for( let i = 0; i < data.length; i++ ) { %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="product-box">
+						<a href="/product/<%= data[i].id %>"> 
+							<figure class="product-box_image">
+								<img src="<%= data[i].fotoProducto %>" alt="productos ET">
+							</figure>
+							<article class="product-box_data">
+								<h2><%= data[i].nombreProducto %></h2>
+								<p>Publicado por: <%= data[i].usuarios.nombreUsuario %></p>
+								<p><%= data[i].descripcion %></p>
+								<p>Comentarios: 12</p>
+							</article>
+						</a>
+					</section>
+				</div>
+			<% } %>
+	
+		<% } %>
+		 
+		 
+
+	</div>
+
 	<!-- footer -->
 	<%- include ('./partials/footer') %>
 	<!-- /footer -->
