@@ -9,18 +9,9 @@ const bcrypt = require('bcryptjs');
 const usersController = {
 
     profile: function (req,res) {
-        let id = req.params.id
-        let relaciones = {include: [{association: 'productos', include: [{association: 'comentarios'}]}, 
-        {association:'comentarios'}]}
 
-        Usuario.findByPk(id,relaciones)
-        .then(function(data){
-            if (data != null){
-                return res.render('profile', {data: data})
-            }
-        })
+        return res.render('profile', {data: data})
 
-       
         // Usuario.findByPk(req.params.id, {
         //     include: [{association:'productos'}]
         // })
