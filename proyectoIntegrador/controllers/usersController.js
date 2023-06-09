@@ -9,21 +9,18 @@ const bcrypt = require('bcryptjs');
 const usersController = {
 
     profile: function (req,res) {
-        return res.render('profile', {data: data})
-        // Usuario.findByPk(req.params.id, {
-        //     include: [{association:'productos'}]
-        // })
-        // .then(function(data){
-        //     if (data != null) {
-        //         return res.render('profile', { data: data })
-        //     } else {
-        //         return res.redirect('/')
-        //     }
-        // })
-        // .catch(function(err){
-        //     console.log(err);
-        // })
+        Usuario.findByPk(req.params.id, { 
+            include: [{association:'comentarios'}, {association:'productos', include:[{association:'comentarios'}]}],
+            order: [['createdAt', 'DESC']]
+        })
+        .then(function(data){
+            return res.render('profile', {data: data})
+        })
+        .catch(function(err){
+            console.log(err);
+        })
     },
+    
     profileEdit: function (req,res) {
          return res.render('profile-edit', {data: data})
     },

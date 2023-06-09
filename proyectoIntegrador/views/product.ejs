@@ -3,15 +3,20 @@
 <!-- Include Head -->
 <%- include ('./partials/head') %>
 <body>
-	<!-- Header -->
-	<%- include ('./partials/header') %>
-	<!-- /Header -->
+		<!-- Header -->
+		<% if (user != null) { %>
+			<%- include('./partials/headerLogueado') %>
+		<% } else { %>
+			<%- include('./partials/header') %>
+		<% } %>
+		
+		<!-- /Header -->
 	
 	<!-- product detail -->
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
 			<h2 class="products-title"><%= data.nombreProducto %></h2> 
-			<p class="product-detail-description">Publicado por: <%= data.usuarios.nombreUsuario %></p>
+			<p class="product-detail-description">Publicado por: <a href="/users/profile/<%= data.usuarios.id %>"><%= data.usuarios.nombreUsuario %></a></p>
 			<!-- <p class="product-detail-description">
 				<a href="/product/add">Editar</a>
 			</p> -->

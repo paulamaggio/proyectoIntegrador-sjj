@@ -4,9 +4,14 @@
 <%- include ('./partials/head.ejs') %>
 
 <body>
-	<!-- Header -->
-	<%- include ('./partials/headerLogueado.ejs') %>
-	<!-- /Header -->
+		<!-- Header -->
+		<% if (user != null) { %>
+			<%- include('./partials/headerLogueado') %>
+		<% } else { %>
+			<%- include('./partials/header') %>
+		<% } %>
+		
+		<!-- /Header -->
 
 	<!-- Novedades -->
 	<div class="container products-wrapper">

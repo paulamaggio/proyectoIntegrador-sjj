@@ -5,19 +5,24 @@
 <%- include ('./partials/head') %>
 
 <body>
-	<!-- Header -->
-	<%- include ('./partials/headerLogueado') %>
-	<!-- /Header -->
+		<!-- Header -->
+		<% if (user != null) { %>
+			<%- include('./partials/headerLogueado') %>
+		<% } else { %>
+			<%- include('./partials/header') %>
+		<% } %>
+		
+		<!-- /Header -->
 
 	<!-- Datos del usuario -->
 	<section class="info-usuario container products-wrapper">
 		<div class="row">
 			<div class="img-container offset-3 col-2">
-				<img src="<%= data.usuario.foto %>" alt="foto de perfil" class="foto-perfil">
+				<img src="<%= data.fotoPerfil %>" alt="foto de perfil" class="foto-perfil">
 			</div>
 			<div class="data-container col-6">
 				<div class="d-flex align-items-center ">
-					<h1 class="main-title"> <%= data.usuario.usuario  %> 
+					<h1 class="main-title"> <%= data.nombreUsuario  %> 
 						<a href="/users/profile/edit">
 							<i class= "fas fa-cog"></i>
 						</a>
@@ -26,10 +31,10 @@
 				</div>
 				<div>
 					<ul class="">
-						<li><%= data.usuario.email %></li>
-						<li>8 productos</li>
+						<li><%= data.email %></li>
+						<li><%=data.productos.length%> productos</li>
 						<li>1M seguidores</li>
-						<li>300 comentarios</li>
+						<li><%=data.comentarios.length%> comentarios </li>
 					</ul>
 				</div>
 			</div>
@@ -44,17 +49,17 @@
 				<h2 class="products-title">Mis productos</h2>
 			</div>
 			<!-- Show mis productos -->
-			<% for( let i = 0; i < 8; i++ ) { %>
+			<% for( let i = 0; i < data.productos.length; i++ ) { %>
 				<div class="col-12 col-sm-6 col-lg-3">
 					<section class="product-box">
-						<a href="/product">
+						<a href="/product/<%= data.productos[i].id %>">
 							<figure class="product-box_image">
 								<img src= '<%= data.productos[i].fotoProducto %>' alt="cafetera moulinex">
 							</figure>
 							<article class="product-box_data">
-								<h2> <%= data.productos[i].nombre %></h2>
+								<h2> <%= data.productos[i].nombreProducto %></h2>
 								<p> <%= data.productos[i].descripcion %></p>
-								<p>Comentarios: 12</p>
+								<p>Comentarios: <%= data.productos[i].comentarios.length %></p>
 							</article>
 						</a>
 					</section>
