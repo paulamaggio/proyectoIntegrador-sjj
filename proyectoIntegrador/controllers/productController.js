@@ -19,21 +19,29 @@ const productController = {
         })
     },
 
-    productAdd: function (req,res) {
+    add: function (req, res) {
         return res.render('product-add')
     },
 
     productAddStore: function (req,res) {
-        
-         Producto.create({
-            idUsuario: req.session.user.id,
-            nombreProducto: req.body.nombre,
-            fotoProducto: req.body.producto,
-            descripcion: req.body.descripcion
-         })
-         return res.redirect('/')
+        if(req.session.user != null){
+            Producto.create({
+                idUsuario: req.session.idUser,
+                nombreProducto: req.body.nombre,
+                fotoProducto: req.body.producto,
+                descripcion: req.body.descripcion
+             }) 
+             .then(function(data){
+                res.redirect('/')
+             })
+             .catch(function(err){
+                console.log(err);
+             })
+        }
+        else{
+            res.redirect('/register') 
+        }
      }
-
 }
 
 module.exports = productController;
