@@ -2,6 +2,7 @@
 
 const db = require('../database/models');
 const Producto = db.Producto;
+// const Usuario = db.Usuario;
 
 const productController = {
 
@@ -19,8 +20,20 @@ const productController = {
     },
 
     productAdd: function (req,res) {
-        return res.render('product-add', {data: data})
-    },
+        return res.render('product-add')
+    }
+
+    // productAddStore: function (req,res) {
+        
+    //     Producto.create({
+    //         // idUsuario: req.session.Usuario.id,
+    //         nombreProducto: req.body.nombre,
+    //         fotoProducto: req.body.producto,
+    //         descripcion: req.body.descripcion
+    //     })
+    //     return res.redirect('/')
+    // }
+
 }
 
 module.exports = productController;

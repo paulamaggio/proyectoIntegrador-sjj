@@ -30,8 +30,10 @@ const indexController = {
         let busqueda = req.query.search;
         console.log(busqueda);
         Producto.findAll({
+            order: [['createdAt', 'DESC']],
             include: [{association:'usuarios'}, {association:'comentarios'}],
-            where: {nombreProducto: {[op.like]:"%"+busqueda+"%"}}
+            where: {nombreProducto: {[op.like]:"%"+busqueda+"%"}},
+            where: {descripcion: {[op.like]:"%"+busqueda+"%"}},
         })
         .then(function(data){
             console.log(data);
