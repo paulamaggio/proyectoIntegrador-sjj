@@ -26,7 +26,7 @@ const productController = {
     // productAddStore: function (req,res) {
         
     //     Producto.create({
-    //         // idUsuario: req.session.Usuario.id,
+    //         // idUsuario: req.session.user.id,
     //         nombreProducto: req.body.nombre,
     //         fotoProducto: req.body.producto,
     //         descripcion: req.body.descripcion
