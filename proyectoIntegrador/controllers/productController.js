@@ -21,18 +21,18 @@ const productController = {
 
     productAdd: function (req,res) {
         return res.render('product-add')
-    }
+    },
 
-    // productAddStore: function (req,res) {
+    productAddStore: function (req,res) {
         
-    //     Producto.create({
-    //         // idUsuario: req.session.user.id,
-    //         nombreProducto: req.body.nombre,
-    //         fotoProducto: req.body.producto,
-    //         descripcion: req.body.descripcion
-    //     })
-    //     return res.redirect('/')
-    // }
+         Producto.create({
+            idUsuario: req.session.user.id,
+            nombreProducto: req.body.nombre,
+            fotoProducto: req.body.producto,
+            descripcion: req.body.descripcion
+         })
+         return res.redirect('/')
+     }
 
 }
 

@@ -32,8 +32,11 @@ const indexController = {
         Producto.findAll({
             order: [['createdAt', 'DESC']],
             include: [{association:'usuarios'}, {association:'comentarios'}],
-            where: {nombreProducto: {[op.like]:"%"+busqueda+"%"}},
-            where: {descripcion: {[op.like]:"%"+busqueda+"%"}},
+            where: {
+                [op.or]:[
+                {nombreProducto: {[op.like]:"%"+busqueda+"%"}},
+                {descripcion: {[op.like]:"%"+busqueda+"%"}}]
+            }
         })
         .then(function(data){
             console.log(data);
