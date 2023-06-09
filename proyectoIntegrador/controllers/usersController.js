@@ -42,21 +42,30 @@ const usersController = {
                 errors.message = 'El usuario no existe';
                 res.locals.errors = errors; /* guardar el error en locals */
                 return res.render('login');
-            } else if (bcrypt.compareSync(req.body.contrasena, data.contrasena) == false) {
-                errors.message = 'La contraseña es incorrecta';
-                res.locals.errors = errors;
-                return res.render('login');
-            } else if (req.body.recordame != undefined){
-                // cookies
-                res.cookie('idUsuario', data.id, {maxAge: 1000 * 60 * 5})
-                res.session.nombreUsuario = data
-                return res.redirect('/');
-            } else {
-                return res.redirect('/');
+            } 
+            else {
+                if (bcrypt.compareSync(req.body.contrasena, data.contrasena)){
+                    req.session.user = data.nombreUsuario;
+                    req.session.idUser = data.id;
+                    if (req.body.recordame){
+                        res.cookie('idUsuario', data.id, {maxAge: 1000 * 60 * 5})
+                    }
+                    return res.redirect('/');
+                }
+                else {
+                    errors.message = 'La contraseña es incorrecta';
+                    res.locals.errors = errors;
+                    return res.render('login');
+                }
             }
         }).catch(function(error) {
             console.log(error);
         })
+    },
+    logout: function (req,res){
+        req.session.destroy(),
+        res.clearCookie('idUsuario'),
+        res.redirect('/');
     },
     register: function (req,res) { 
         return res.render('register');

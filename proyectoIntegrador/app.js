@@ -30,7 +30,8 @@ app.use(session({
 
 // pasar datos de session a las vistas
 app.use(function (req, res, next) {
-  res.locals.user = req.session.nombreUsuario
+  res.locals.user = req.session.user;
+  res.locals.idUser = req.session.idUser;
   return next()
 })
 
