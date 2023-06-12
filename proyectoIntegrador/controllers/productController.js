@@ -70,9 +70,14 @@ const productController = {
     },
 
     edit:function (req,res) {
+        return res.render('product-edit')
+    },
+
+    editStore: function (req,res) {
         let errors = {};
+        console.log('chau', req.body.id)
         Producto.findByPk(req.body.id, {
-            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
+         include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
             if(req.session.idUser == data.idUsuario){
                 return res.render('product-edit')  
@@ -86,26 +91,20 @@ const productController = {
         .catch(function(err){
             console.log(err);
         })   
-    },
-
-    editStore: function (req,res) {
-        Producto.findByPk(req.body.id)
-        .then(function (data) {
-            Producto.update(
-                {nombreProducto: req.body.nombre,
-                descripcion: req.body.descripcion},
-                {where: {id : req.body.id}
-            })
-            .then(function(data){
-                    res.redirect('/')
-            })
-            .catch(function(err){
-                    console.log(err);
-            })
-        })
-         .catch(function(err){
-             console.log(err);
-         }) 
+       // Producto.findByPk(req.body.id)
+       // .then(function (data) {
+       //     Producto.update(
+       //         {nombreProducto: req.body.nombre,
+       //         descripcion: req.body.descripcion},
+       //         {where: {id : req.body.id}
+       //     })
+       //     .then(function(data){
+       //             res.redirect('/')
+       //    })
+       //     .catch(function(err){
+       //             console.log(err);
+       //     })
+      //  })
     }
 }
 
