@@ -79,14 +79,12 @@ const productController = {
         Producto.findByPk(req.body.id, {
          include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
-            if(req.session.idUser == data.idUsuario){
-                return res.render('product-edit')  
-            }
-            else{
+            if(req.session.idUser != data.idUsuario){
                 errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
                 res.locals.errors = errors; //Usamos locals para pasarlo a la vista
-                res.render('product', {data:data}); //Renderizamos la vista 
+                 res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
             }
+          
         })
         .catch(function(err){
             console.log(err);
