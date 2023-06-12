@@ -16,10 +16,22 @@
 	<div class="container products-wrapper">
 		<div class="d-flex align-items-center">
 			<h2 class="products-title"><%= data.nombreProducto %></h2> 
-			<p class="product-detail-description">Publicado por: <a href="/users/profile/<%= data.usuarios.id %>"><%= data.usuarios.nombreUsuario %></a></p>
-			<!-- <p class="product-detail-description">
-				<a href="/product/add">Editar</a>
-			</p> -->
+			<p class="product-detail-description">Publicado por: <a href="/users/profile/<%= data.usuarios.id %>"><%= data.usuarios.nombreUsuario %></a></p>			
+			
+			<form action="/product/edit" method="get">
+				<input type="text" value="<%= data.id %>" name="id" hidden>
+				<button class="action-button.delete" type="submit">Editar</button>
+			</form>
+			
+			<form action="/product/delete" method="post">
+				<input type="text" value="<%= data.id %>" name="id" hidden>
+				<button class="action-button.delete" type="submit">Borrar</button>
+			</form>
+		
+			<% if(locals.errors){  %> 
+				<p class= “error”> <%= errors.message %> </p>
+			<% } %>
+
 		</div>
 		<div class="product-detail">
 			<div class="row">

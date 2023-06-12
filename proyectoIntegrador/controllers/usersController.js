@@ -1,4 +1,4 @@
-const data = require('../data/data');
+// const data = require('../data/data');
 
 const db = require('../database/models');
 const Usuario = db.Usuario;
@@ -24,9 +24,11 @@ const usersController = {
     profileEdit: function (req,res) {
          return res.render('profile-edit', {data: data})
     },
+
     login: function (req,res) {
         return res.render('login');
     },
+
     loginStore: function (req,res) {
         let errors = {};
         Usuario.findOne({
@@ -57,14 +59,17 @@ const usersController = {
             console.log(error);
         })
     },
+
     logout: function (req,res){
         req.session.destroy(),
         res.clearCookie('idUsuario'),
         res.redirect('/');
     },
+
     register: function (req,res) { 
         return res.render('register');
     },
+    
     registerStore: function (req,res) {
         let errors = {};
         if(req.body.nombreUsuario == ""){

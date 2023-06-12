@@ -5,7 +5,10 @@ const productController = require('../controllers/productController');
 router.get('/idProduct/:id', productController.product);
 
 router.get('/add', productController.add);
-
 router.post('/add', productController.productAddStore);
+router.post('/delete', productController.delete);
+
+router.get('/edit', productController.edit)
+router.post('/edit', productController.editStore)
 
 module.exports = router;
