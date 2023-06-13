@@ -83,8 +83,16 @@ const productController = {
                 errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
                 res.locals.errors = errors; //Usamos locals para pasarlo a la vista
                  res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+            } else {
+                console.log('HOLA', req.body.id)
+                Producto.update(
+                    {nombreProducto: req.body.nombre,
+                    fotoProducto: req.body.producto,
+                    descripcion: req.body.descripcion},
+                    {where: {id : data.id}}
+                )
+                res.redirect('/')
             }
-          
         })
         .catch(function(err){
             console.log(err);

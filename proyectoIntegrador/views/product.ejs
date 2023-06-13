@@ -18,7 +18,7 @@
 			<h2 class="products-title"><%= data.nombreProducto %></h2> 
 			<p class="product-detail-description">Publicado por: <a href="/users/profile/<%= data.usuarios.id %>"><%= data.usuarios.nombreUsuario %></a></p>			
 			
-			<form action="/product/edit" method="post">
+			<form action="/product/edit" method="get">
 				<input type="text" value="<%= data.id %>" name="id" hidden>
 				<button class="action-button.delete" type="submit">Editar</button>
 			</form>
