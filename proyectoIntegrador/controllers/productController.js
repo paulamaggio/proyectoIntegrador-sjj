@@ -70,38 +70,60 @@ const productController = {
     },
 
     edit:function (req,res) {
-        let id = req.body.id
-        Producto.findByPk(id)
-        .then(function(data){
-            return res.render('product-edit', {data:data})
-        })
-        
-    },
-
-    editStore: function (req,res) {
         let errors = {};
-        console.log('chau', req.body.id)
-        Producto.findByPk(req.body.id, {
-         include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
+        let id = req.params.id
+        console.log(id);
+        Producto.findByPk(id, {
+            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
             if(req.session.idUser != data.idUsuario){
                 errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
                 res.locals.errors = errors; //Usamos locals para pasarlo a la vista
-                 res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+                res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
             } else {
-                console.log('HOLA', req.body.id)
-                Producto.update(
-                    {nombreProducto: req.body.nombre,
-                    fotoProducto: req.body.producto,
-                    descripcion: req.body.descripcion},
-                    {where: {id : data.id}}
-                )
-                res.redirect('/')
+                return res.render('product-edit', {data:data})
             }
         })
         .catch(function(err){
             console.log(err);
+        })
+    },
+
+    editStore: function (req,res) {
+
+        // let errors = {};
+        console.log('chau', req.body.id)
+        Producto.findByPk(req.body.id, {
+            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
+        .then(function(data){
+            Producto.update(
+                {nombreProducto: req.body.nombre,
+                fotoProducto: req.body.producto,
+                descripcion: req.body.descripcion},
+                {where: {id : data.id}}
+            )
+            res.redirect('/')
+
+            // if(req.session.idUser != data.idUsuario){
+            //     errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
+            //     res.locals.errors = errors; //Usamos locals para pasarlo a la vista
+            //     res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+            // } else {
+            //     console.log('HOLA', req.body.id)
+            //     Producto.update(
+            //         {nombreProducto: req.body.nombre,
+            //         fotoProducto: req.body.producto,
+            //         descripcion: req.body.descripcion},
+            //         {where: {id : data.id}}
+            //     )
+            //     res.redirect('/')
+            // }
+        })
+        .catch(function(err){
+            console.log(err);
         })   
+
+
        // Producto.findByPk(req.body.id)
        // .then(function (data) {
        //     Producto.update(
