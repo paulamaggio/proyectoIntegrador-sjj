@@ -70,7 +70,12 @@ const productController = {
     },
 
     edit:function (req,res) {
-        return res.render('product-edit')
+        let id = req.body.id
+        Producto.findByPk(id)
+        .then(function(data){
+            return res.render('product-edit', {data:data})
+        })
+        
     },
 
     editStore: function (req,res) {
