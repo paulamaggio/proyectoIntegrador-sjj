@@ -23,20 +23,22 @@
 			<!-- Show the "ultimos" products -->
 			<h2 class = "col-12"> 
 			<form action="/product/edit" method="post">
-		
+				
+				<input type="text" value="<%= data.id %>" name="id" hidden>
+
 				<div>
 					<label for="producto" class="form-label">Agrega una foto del producto</label>
-					<input type="text" name="producto" value="" class="form-input">
+					<input type="text" name="producto" value="<%= data.fotoProducto %>" class="form-input">
 				</div>
 
 				<div>
 					<label for="nombre" class="form-label">Nombre del producto: </label>
-					<input type="text" name="nombre" value="" class="form-input">
+					<input type="text" name="nombre" value="<%= data.nombreProducto %>" class="form-input">
 				</div>
 		
 				<div>
 					<label for="descripcion" class="form-label">Descripcion del producto: </label>
-					<input type="text" name="descripcion" value="" class="form-input">
+					<input type="text" name="descripcion" value="<%= data.descripcion %>" class="form-input">
 				</div>
 		
 				<div>
