@@ -22,8 +22,45 @@ const usersController = {
     },
     
     profileEdit: function (req,res) {
-         return res.render('profile-edit', {data: data})
+        let errors = {};
+        let id = req.params.id
+
+        Usuario.findByPk(id,{include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
+        .then(function(data){
+            if(req.session.idUser != data.id){
+                errors.message = 'Este usuario no le pertenece, no puede editarlo'; //cargamos el mensaje
+                res.locals.errors = errors; //Usamos locals para pasarlo a la vista
+                res.render('profile', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+            } else {
+                return res.render('profile-edit', {data:data})
+            } 
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+       
     },
+
+    profileEditStore: function (req,res) {
+        console.log('llega', req.body.id)
+        Usuario.findByPk(req.body.id,{include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
+        .then(function(data){
+            Usuario.update(
+                {nombreUsuario: req.body.usuario,
+                email: req.body.email,
+                contrasena: req.body.password, 
+                fecha: req.body.nacimiento,
+                dni: req.body.dni,
+                fotoPerfil: req.body.avatar},
+                {where: {id : data.id}}
+            )
+            res.redirect('/')
+        })
+        .catch(function(err){
+            console.log(err);
+        }) 
+       
+   },
 
     login: function (req,res) {
         return res.render('login');

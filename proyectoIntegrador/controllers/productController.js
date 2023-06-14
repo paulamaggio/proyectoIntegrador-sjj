@@ -92,7 +92,6 @@ const productController = {
     editStore: function (req,res) {
 
         // let errors = {};
-        console.log('chau', req.body.id)
         Producto.findByPk(req.body.id, {
             include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
@@ -138,6 +137,10 @@ const productController = {
        //             console.log(err);
        //     })
        //  })
+    },
+
+    comentario: function(req, res){
+
     }
 }
 
