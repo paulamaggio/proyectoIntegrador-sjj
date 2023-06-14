@@ -115,7 +115,7 @@ const productController = {
        //     .catch(function(err){
        //             console.log(err);
        //     })
-      //  })
+       //  })
     }
 }
 
