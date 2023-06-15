@@ -11,4 +11,6 @@ router.post('/delete', productController.delete);
 router.get('/edit/:id', productController.edit)
 router.post('/edit', productController.editStore)
 
+router.post('/comentario', productController.comentario)
+
 module.exports = router;

@@ -54,8 +54,9 @@
                     <!-- /Comentarios -->
 
 
-					<form class="form" action="/product/idProduct/<%= data.id %>" method="get">
-						<input class="form-input" type="text" value="" placeholder="Agregar comentario">
+					<form class="form" action="/product/comentario" method="post">
+						<input type="text" value="<%= data.id %>" name="id" hidden>
+						<input class="form-input" type="text" value="" name= "comment" placeholder="Agregar comentario">
 						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
 					</form>
 					<hr>

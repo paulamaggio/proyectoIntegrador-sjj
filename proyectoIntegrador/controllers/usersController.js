@@ -52,7 +52,7 @@ const usersController = {
             Usuario.update(
                 {nombreUsuario: req.body.usuario,
                 email: req.body.email,
-                contrasena: req.body.password, 
+                contrasena: bcrypt.hashSync(req.body.contrasena, 10), 
                 fecha: req.body.nacimiento,
                 dni: req.body.dni,
                 fotoPerfil: req.body.avatar},
