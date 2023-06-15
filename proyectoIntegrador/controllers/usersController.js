@@ -3,6 +3,8 @@
 const db = require('../database/models');
 const Usuario = db.Usuario;
 const Comentario = db.Comentario;
+const op = db.Sequelize.Op;
+
 
 const bcrypt = require('bcryptjs');
 
@@ -25,12 +27,13 @@ const usersController = {
         let errors = {};
         let id = req.params.id
 
-        Usuario.findByPk(id,{include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
+        Usuario.findByPk(id, {
+            include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
         .then(function(data){
             if(req.session.idUser != data.id){
                 errors.message = 'Este usuario no le pertenece, no puede editarlo'; //cargamos el mensaje
                 res.locals.errors = errors; //Usamos locals para pasarlo a la vista
-                res.render('profile', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+                res.render('profile', {data:data}); //Renderizamos la vista
             } else {
                 return res.render('profile-edit', {data:data})
             } 
@@ -43,7 +46,8 @@ const usersController = {
 
     profileEditStore: function (req,res) {
         console.log('llega', req.body.id)
-        Usuario.findByPk(req.body.id,{include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
+        Usuario.findByPk(req.body.id, {
+            include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
         .then(function(data){
             Usuario.update(
                 {nombreUsuario: req.body.usuario,
@@ -59,7 +63,6 @@ const usersController = {
         .catch(function(err){
             console.log(err);
         }) 
-       
    },
 
     login: function (req,res) {
@@ -137,11 +140,34 @@ const usersController = {
                     });
                     return res.redirect('/users/login'); // devuleve al login para que ingrese a la cuenta 
                 }
-            }).catch(function(error) {
+            })
+            .catch(function(error) {
                 console.log(error);
             })
         }
+    },
+
+    userSearch: function (req,res) {
+        let busqueda = req.query.search;
+        console.log(busqueda);
+        Usuario.findAll({
+            order: [['createdAt', 'DESC']],
+            include: [{association:'comentarios'}, {association:'productos', include:[{association:'comentarios'}]}],
+            where: {
+                [op.or]:[
+                {nombreUsuario: {[op.like]:"%"+busqueda+"%"}},
+                {email: {[op.like]:"%"+busqueda+"%"}}]
+            }
+        })
+        .then(function(data){
+            console.log(data);
+            return res.render('user-search-results', {data: data});
+        })
+        .catch(function(err){
+            console.log(err);
+        })
     }
+    
 }
 
 module.exports = usersController;

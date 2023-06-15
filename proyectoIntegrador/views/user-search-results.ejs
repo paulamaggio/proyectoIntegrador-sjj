@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- Include Head -->
+
+<%- include ('./partials/head') %>
+
+<body>
+	<!-- Header -->
+	<% if (user != null) { %>
+		<%- include('./partials/headerLogueado') %>
+	<% } else { %>
+		<%- include('./partials/header') %>
+	<% } %>
+		
+	<!-- /Header -->
+
+	<!-- Novedades -->
+	<div class="container products-wrapper">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="products-title">Resultados de búsqueda de usuarios</h2>
+			</div>
+			
+			<!-- Show the "ultimos" products -->
+		<% if (data.length == 0) { %>
+			<p class="product-detail-description">Lo sentimos no hay resultados para su busqueda</p>
+		<% } else { %> 
+			<% for( let i = 0; i < data.length; i++ ) { %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<section class="info-usuario container products-wrapper">
+						<a href="/users/profile/<%= data[i].id %>"> 
+							<figure class="img-container offset-3">
+								<img src="<%= data[i].fotoPerfil %>" alt="foto perfil">
+							</figure>
+							<article class="data-container">
+								<ul class="">
+                                    <li><%= data[i].email %></li>
+                                    <li><%=data[i].productos.length%> productos</li>
+                                    <li>1M seguidores</li>
+                                    <li><%=data[i].comentarios.length%> comentarios </li>
+                                </ul>
+							</article>
+						</a>
+					</section>
+				</div>
+			<% } %>
+	
+		<% } %>
+		 
+	</div>
+
+	<!-- footer -->
+	<%- include ('./partials/footer') %>
+	<!-- /footer -->
+</body>
+
+</html>

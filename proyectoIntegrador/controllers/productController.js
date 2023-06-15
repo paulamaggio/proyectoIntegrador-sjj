@@ -7,7 +7,6 @@ const Producto = db.Producto;
 const productController = {
 
     product: function (req,res) {
-
         Producto.findByPk(req.params.id, {
             include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]
         })
@@ -79,7 +78,7 @@ const productController = {
             if(req.session.idUser != data.idUsuario){
                 errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
                 res.locals.errors = errors; //Usamos locals para pasarlo a la vista
-                res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
+                res.render('product', {data:data}); //Renderizamos la vista
             } else {
                 return res.render('product-edit', {data:data})
             }
@@ -91,7 +90,6 @@ const productController = {
 
     editStore: function (req,res) {
 
-        // let errors = {};
         Producto.findByPk(req.body.id, {
             include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
@@ -102,41 +100,10 @@ const productController = {
                 {where: {id : data.id}}
             )
             res.redirect('/')
-
-            // if(req.session.idUser != data.idUsuario){
-            //     errors.message = 'Este producto no le pertenece, no puede editarlo'; //cargamos el mensaje
-            //     res.locals.errors = errors; //Usamos locals para pasarlo a la vista
-            //     res.render('product', {data:data}); //Renderizamos la vista    return res.render('product-edit')
-            // } else {
-            //     console.log('HOLA', req.body.id)
-            //     Producto.update(
-            //         {nombreProducto: req.body.nombre,
-            //         fotoProducto: req.body.producto,
-            //         descripcion: req.body.descripcion},
-            //         {where: {id : data.id}}
-            //     )
-            //     res.redirect('/')
-            // }
         })
         .catch(function(err){
             console.log(err);
-        })   
-
-
-       // Producto.findByPk(req.body.id)
-       // .then(function (data) {
-       //     Producto.update(
-       //         {nombreProducto: req.body.nombre,
-       //         descripcion: req.body.descripcion},
-       //         {where: {id : req.body.id}
-       //     })
-       //     .then(function(data){
-       //             res.redirect('/')
-       //    })
-       //     .catch(function(err){
-       //             console.log(err);
-       //     })
-       //  })
+        })  
     },
 
     comentario: function(req, res){

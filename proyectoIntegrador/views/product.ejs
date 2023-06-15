@@ -19,11 +19,6 @@
 			<p class="product-detail-description">Publicado por: <a href="/users/profile/<%= data.usuarios.id %>"><%= data.usuarios.nombreUsuario %></a></p>			
 			
 			<p class="product-detail-description"><a href="/product/edit/<%= data.id %>">Editar</a></p>
-
-			<!-- <form action="/product/edit" method="post">
-				<input type="text" value="<%= data.id %>" name="id" hidden>
-				<button class="action-button.delete" type="submit">Editar</button>
-			</form> -->
 			
 			<form action="/product/delete" method="post">
 				<input type="text" value="<%= data.id %>" name="id" hidden>
