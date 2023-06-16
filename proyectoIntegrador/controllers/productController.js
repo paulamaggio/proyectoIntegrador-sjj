@@ -53,10 +53,8 @@ const productController = {
                 if(data.comentarios != null){
                     for(i=0; i<data.comentarios.length; i++){
                         let idComentario = data.comentarios[i].id
-                        console.log(idComentario)
                         Comentario.destroy({
                             where: {id : idComentario}})
-
                     }}
                     Producto.destroy({
                         where: {id : data.id}
@@ -84,7 +82,6 @@ const productController = {
     edit:function (req,res) {
         let errors = {};
         let id = req.params.id
-        console.log(id);
         Producto.findByPk(id, {
             include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]})
         .then(function(data){
@@ -120,7 +117,6 @@ const productController = {
     },
 
     comentario: function(req, res){
-        let errors = {}
         let id = req.body.id
         Producto.findByPk(id, {include:[{association:'comentarios', include: {association: 'usuarios'}}, {association: 'usuarios'}]})
         .then(function(data){

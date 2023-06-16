@@ -3,6 +3,7 @@
 const db = require('../database/models');
 const Usuario = db.Usuario;
 const Comentario = db.Comentario;
+const Producto = db.Producto;
 const op = db.Sequelize.Op;
 
 
@@ -13,7 +14,7 @@ const usersController = {
     profile: function (req,res) {
         Usuario.findByPk(req.params.id, { 
             include: [{association:'comentarios'}, {association:'productos', include:[{association:'comentarios'}]}],
-            order: [['createdAt', 'DESC']]
+            order: [[{model:Producto, as: 'productos'},'createdAt', 'DESC']]
         })
         .then(function(data){
             return res.render('profile', {data: data})
@@ -45,19 +46,28 @@ const usersController = {
     },
 
     profileEditStore: function (req,res) {
-        console.log('llega', req.body.id)
         Usuario.findByPk(req.body.id, {
             include:[{association: 'productos', include: [{association: 'comentarios'}]}, {association: 'comentarios'}]})
         .then(function(data){
-            Usuario.update(
+            if(req.body.contrasena){
+                Usuario.update(
+                    {nombreUsuario: req.body.usuario,
+                    email: req.body.email,
+                    contrasena: bcrypt.hashSync(req.body.contrasena, 10), 
+                    fecha: req.body.nacimiento,
+                    dni: req.body.dni,
+                    fotoPerfil: req.body.avatar},
+                    {where: {id : data.id}}
+                )
+            } else {                
+                Usuario.update(
                 {nombreUsuario: req.body.usuario,
-                email: req.body.email,
-                contrasena: bcrypt.hashSync(req.body.contrasena, 10), 
+                email: req.body.email, 
                 fecha: req.body.nacimiento,
                 dni: req.body.dni,
                 fotoPerfil: req.body.avatar},
                 {where: {id : data.id}}
-            )
+            )}
             res.redirect('/')
         })
         .catch(function(err){
@@ -149,7 +159,6 @@ const usersController = {
 
     userSearch: function (req,res) {
         let busqueda = req.query.search;
-        console.log(busqueda);
         Usuario.findAll({
             order: [['createdAt', 'DESC']],
             include: [{association:'comentarios'}, {association:'productos', include:[{association:'comentarios'}]}],
@@ -160,7 +169,6 @@ const usersController = {
             }
         })
         .then(function(data){
-            console.log(data);
             return res.render('user-search-results', {data: data});
         })
         .catch(function(err){

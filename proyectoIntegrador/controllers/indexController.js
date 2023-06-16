@@ -28,7 +28,6 @@ const indexController = {
     search: function (req,res) {
 
         let busqueda = req.query.search;
-        console.log(busqueda);
         Producto.findAll({
             order: [['createdAt', 'DESC']],
             include: [{association:'usuarios'}, {association:'comentarios'}],
@@ -39,7 +38,6 @@ const indexController = {
             }
         })
         .then(function(data){
-            console.log(data);
             return res.render('search-results', {data: data});
         })
         .catch(function(err){

@@ -35,7 +35,30 @@ app.use(function (req, res, next) {
   return next()
 })
 
-// creando el middleware de cookies
+app.use(function(req, res, next) {
+  if (req.session.user != undefined) {
+      res.locals.user = req.session.user;
+      return next();
+  }
+  return next();
+});
+//  middleware para cookies
+app.use(function(req, res, next) {
+  if (req.cookies.usuario != undefined && req.session.user == undefined) {
+      let idUsuarioEnCookie = req.cookies.usuario;
+      Usuario.findByPk(idUsuarioEnCookie)
+      .then((data) => {
+        req.session.user = data.dataValues;
+        res.locals.user  = data.dataValues;
+        return next();
+      }).catch((err) => {
+        console.log(err);
+        return next();
+      });
+  } else {
+    return next();
+  }
+});
 
 app.use('/', indexRouter);
 app.use('/product', productRouter);
