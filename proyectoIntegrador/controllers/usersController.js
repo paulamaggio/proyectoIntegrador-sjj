@@ -52,7 +52,6 @@ const usersController = {
             if(req.body.contrasena){
                 Usuario.update(
                     {nombreUsuario: req.body.usuario,
-                    email: req.body.email,
                     contrasena: bcrypt.hashSync(req.body.contrasena, 10), 
                     fecha: req.body.nacimiento,
                     dni: req.body.dni,
@@ -62,7 +61,6 @@ const usersController = {
             } else {                
                 Usuario.update(
                 {nombreUsuario: req.body.usuario,
-                email: req.body.email, 
                 fecha: req.body.nacimiento,
                 dni: req.body.dni,
                 fotoPerfil: req.body.avatar},
@@ -122,6 +120,7 @@ const usersController = {
     
     registerStore: function (req,res) {
         let errors = {};
+        // las validaciones del email estan especificadas en la base de datos
         if(req.body.nombreUsuario == ""){
             errors.message = 'El nombre de usuario no puede estar vacío.'; //cargamos el mensaje
             res.locals.errors = errors; //Usamos locals para pasarlo a la vista
@@ -144,7 +143,7 @@ const usersController = {
                         nombreUsuario: req.body.nombreUsuario,
                         email: req.body.email,
                         contrasena: bcrypt.hashSync(req.body.contrasena, 10),
-                        fotoPerfil: req.body.fotoPerfil, // ver que se haria en este caso para poder poner una foto                        
+                        fotoPerfil: req.body.fotoPerfil, // se pone un link de una foto de internet o de la careta de public                        
                         fecha: req.body.nacimiento,
                         dni: req.body.dni,
                     });
