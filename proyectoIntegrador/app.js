@@ -35,6 +35,8 @@ app.use(function (req, res, next) {
   return next()
 })
 
+// creando el middleware de cookies
+
 app.use('/', indexRouter);
 app.use('/product', productRouter);
 app.use('/users', usersRouter);

@@ -53,12 +53,15 @@
                     </section>
                     <!-- /Comentarios -->
 
-
-					<form class="form" action="/product/comentario" method="post">
-						<input type="text" value="<%= data.id %>" name="id" hidden>
-						<input class="form-input" type="text" value="" name= "comment" placeholder="Agregar comentario">
-						<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-					</form>
+					<% if (user != null) { %>
+						<form class="form" action="/product/comentario" method="post">
+							<input type="text" value="<%= data.id %>" name="id" hidden>
+							<input class="form-input" type="text" value="" name= "comment" placeholder="Agregar comentario">
+							<button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
+						</form>
+					<% } else { %>
+						<p class="products-title">Debe estar logueado para comentar.</p>
+					<% } %>
 					<hr>
 				</div>
 			</div>

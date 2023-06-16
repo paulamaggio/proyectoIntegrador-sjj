@@ -9,7 +9,8 @@ const productController = {
 
     product: function (req,res) {
         Producto.findByPk(req.params.id, {
-            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}]
+            include: [{association:'usuarios'}, {association:'comentarios', include:[{association:'usuarios'}]}],
+            order: [[{model:Comentario, as: 'comentarios'},'createdAt', 'DESC']]
         })
         .then(function(data){
             return res.render('product', {data: data})
